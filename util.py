@@ -1,3 +1,7 @@
+import warnings
+warnings.filterwarnings('ignore')
+
+
 def course(x):
     if x == 1:
         return '札幌'
@@ -19,3 +23,4 @@ def course(x):
         return '阪神'
     elif x == 10:
         return '小倉'
+    

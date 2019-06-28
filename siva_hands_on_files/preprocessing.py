@@ -3,16 +3,35 @@ import numpy as np
 import math
 
 def preprocessing(df):
-    #斤量/体重
-    df['斤量体重比_1走前'] = df['斤量_1走前'].astype('float') / df['馬体重_1走前']
-    df['斤量体重比_1走前'] = df['斤量体重比_1走前'].apply(lambda x:np.nan if x == np.inf else x)
-
+    #[例2]
+    #走破タイムを「分.秒.コンマ秒」→「秒」などに変換する
+    def convert_time(x):
+        if str(x) == 'nan':
+            return x
+        
+        sp = x.split('.')
+        
+        #1分以内(ex: 58.9)
+        if len(sp) == 2:
+            return float(sp[0])+ float(sp[1])*0.1
+        #1分以上(ex: 1.30.9)
+        if len(sp) == 3:
+            return float(sp[0])*60 + float(sp[1]) + float(sp[2])*0.1
+    
+    df['走破タイム_1走前'].apply(convert_time)
+    df['走破タイム_2走前'].apply(convert_time)
+    df['走破タイム_3走前'].apply(convert_time)
+    
     #開催月,開催日を分割
     df['開催月'] = df['開催日付'] //100
     df['開催日'] = df['開催日付'] %100
 
     df['開催月_1走前'] = df['開催日付_1走前'] //100
     df['開催日_1走前'] = df['開催日付_1走前'] %100
+    df['開催月_2走前'] = df['開催日付_2走前'] //100
+    df['開催日_2走前'] = df['開催日付_2走前'] %100
+    df['開催月_3走前'] = df['開催日付_3走前'] //100
+    df['開催日_3走前'] = df['開催日付_3走前'] %100
 
     #レース間隔(前走から何日)
     def interval(x):

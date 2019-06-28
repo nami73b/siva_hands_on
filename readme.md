@@ -7,3 +7,7 @@
 ## 2.Docker コンテナの起動
 
 `docker run -it -p 8888:8888 siva_handson`
+
+# data.zipファイルを解凍する
+
+`unzip ./siva_hands_on/siva_hands_on_files/data.zip`

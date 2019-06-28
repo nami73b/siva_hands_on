@@ -10,4 +10,4 @@
 
 # data.zipファイルを解凍する
 
-`unzip ./siva_hands_on/siva_hands_on_files/data.zip`
+`unzip ./siva_hands_on_files/data.zip`
